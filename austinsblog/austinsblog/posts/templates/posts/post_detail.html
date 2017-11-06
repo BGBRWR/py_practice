@@ -30,13 +30,6 @@
             </div>
         </nav>
         <div class="container pt-4">
-            <h1 class="text-center">Welcome to Austin's Blog!</h1>
-
-            {% load static %}
-            <img src="{% static 'posts/home.jpg' %}" class="img-fluid center-block" />
-
-            <h2>Latest Posts</h2>
-            <hr> {% for post in posts.all %}
             <a href="{% url 'post_details' post.id %} ">
                 <h3>{{ post.title }}</h3>
             </a>
@@ -44,10 +37,31 @@
                 <i class="material-icons lead ">access_time</i> <span class="ml-1 "><h5 class="lead ">{{ post.pub_date_pretty }}</h5></span>
             </div>
             <img src="{{ post.image.url }} " class="img-fluid mx-auto d-block rounded img-thumbnail " style="max-width:
-                300px; ">
-            <span> {{ post.summary }} </span>
+                600px; ">
+            <span> {{ post.body }} </span>
             <br>
-            <br>{% endfor %}
+            <br>
+
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.identifier = 'post-{{ post.id }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+
+                (function () { // DON'T EDIT BELOW THIS LINE
+                    var d = document,
+                        s = d.createElement('script');
+                    s.src = 'https://walkerxivblogdemo.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the
+                <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+            </noscript>
+
+
+
         </div>
 
 
