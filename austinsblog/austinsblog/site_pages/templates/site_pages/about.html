@@ -30,24 +30,15 @@
             </div>
         </nav>
         <div class="container pt-4">
-            <h1 class="text-center">Welcome to Austin's Blog!</h1>
-
-            {% load static %}
-            <img src="{% static 'posts/home.jpg' %}" class="img-fluid center-block" />
-
-            <h2>Latest Posts</h2>
-            <hr> {% for post in posts.all %}
-            <a href="{% url 'post_details' post.id %} ">
-                <h3>{{ post.title }}</h3>
-            </a>
-            <div class="d-flex ">
-                <i class="material-icons lead ">access_time</i> <span class="ml-1 "><h5 class="lead ">{{ post.pub_date_pretty }}</h5></span>
+            <div class="card">
+                <div class="card-body">
+                    This was created by
+                    <a href="https://github.com/BGBRWR">Austin Walker</a>.
+                </div>
             </div>
-            <img src="{{ post.image.url }} " class="img-fluid mx-auto d-block rounded img-thumbnail " style="max-width:
-                300px; ">
-            <span> {{ post.summary }} </span>
-            <br>
-            <br>{% endfor %}
+
+
+
         </div>
 
 
