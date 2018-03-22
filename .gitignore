@@ -2,3 +2,5 @@
 .vscode
 austins-blog-demo
 redditclone
+swapi
+django-tenant-schemas
