@@ -12,6 +12,8 @@
             {% endblock head_title %}
         </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css" crossorigin="anonymous">
+        
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         {% block head_extra %} {% endblock head_extra %}
     </head>
@@ -34,10 +36,47 @@
                     var markedContent = marked(content)
                     $(this).html(markedContent)
                 })
-            })
-            $(document).ready(function(){
                 $('.post-detail-item img').each(function(){
                     $(this).addClass('img-fluid')
+                })
+                
+
+                var contentInput = $('#id_content')
+                
+                function setContent(value) {
+                    var markedContent = marked(value)
+                    $('#preview-content').html(markedContent)
+                    $('#preview-content img').each(function(){
+                        $(this).addClass('img-fluid')
+                    })
+                }
+
+                if (contentInput.val()) {
+                    setContent(contentInput.val())
+                }
+
+                contentInput.keyup(function(){
+                    console.log($(this))
+                    var newContent = $(this).val()
+                    setContent(newContent)
+                })
+
+                var titleInput = $('#id_title')
+                
+                function setTitle(value) {
+                    $('#preview-title').text(value)
+                }
+                setTitle(titleInput.val())
+
+                titleInput.keyup(function(){
+                    var newTitle = $(this).val()
+                    setTitle(newTitle)
+                })
+
+                $('.comment-reply-btn').click(function(event){
+                    event.preventDefault();
+                    var e = $(this).parents('.comment').find('.comment-reply')
+                    e[0].hidden = !e[0].hidden;
                 })
             })
         </script>

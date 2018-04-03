@@ -3,10 +3,13 @@
 {% block content %}
     <div class="container">
         <h1>{{title}}</h1>
-
-        <form action="" method="get">
-            <input type="text" name='q' placeholder="Search posts" value="{{request.GET.q}}">
-            <input type="submit" value="Search">
+        <form class="form-inline" action="" method="get">
+            <div class="input-group mb-3 w-100">
+                <input class="form-control" type="text" name='q' placeholder="Search posts" value="{{request.GET.q}}">
+                <div class="input-group-append">
+                    <button class="btn btn-primary " type="submit"><span class="oi oi-magnifying-glass"></span></button>
+                </div> 
+            </div>
         </form>
 
         <div class="card-columns">
@@ -22,7 +25,7 @@
                         
                         <h5 class="card-title"><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h5>
                         {% if obj.user.get_full_name %}<p class="card-text">Author: {{ obj.user.get_full_name}}</p>{% endif %}
-                        <p class="card-text ">{{obj.get_markdown}}</p>
+                        <p class="card-text ">{{obj.get_markdown|truncatechars_html:9}}</p>
                         
                         <p class="card-text">
                             <small class="text-muted">{{obj.publish}}</small>
