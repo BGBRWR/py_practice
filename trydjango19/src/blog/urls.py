@@ -22,9 +22,11 @@ from accounts.views import login_view, register_view, logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('comments/', include("comments.urls", namespace='comments')),
-    path('posts/', include("posts.urls", namespace='posts')),
+    path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('api/posts/', include("posts.api.urls", namespace='posts-api')),
+    path('', include("posts.urls", namespace='posts')),
 ]
 
 if settings.DEBUG:

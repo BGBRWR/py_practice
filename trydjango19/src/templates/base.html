@@ -22,6 +22,22 @@
         {% include "messages_display.html" %}
 
         <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'posts:list' %}">Home</a>
+                    </li>
+                    {% block post_detail_link %}
+                    
+                    {% endblock %}
+                    {% if not request.user.is_authenticated %}
+                    <li class="breadcrumb-item ml-auto"><a href="{% url 'register' %}">Register</a></li>
+                    <li class="breadcrumb-item float-right"><a href="{% url 'login' %}">Login</a></li>
+                    {% else %}
+                    <li class="breadcrumb-item float-right"><a href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+                </ol>
+            </nav>
             {% block content %}{% endblock content %}
         </div>
 
@@ -56,7 +72,6 @@
                 }
 
                 contentInput.keyup(function(){
-                    console.log($(this))
                     var newContent = $(this).val()
                     setContent(newContent)
                 })
@@ -83,3 +98,4 @@
     </body>
 
 </html>
+
